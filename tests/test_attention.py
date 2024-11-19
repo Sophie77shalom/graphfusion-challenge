@@ -1,6 +1,7 @@
 import torch
 import pytest
-from model.attention import AttentionMechanism   
+from model.attention import AttentionMechanism
+
 
 # Example test for the attention mechanism
 def test_attention_mechanism():
@@ -9,10 +10,10 @@ def test_attention_mechanism():
     seq_length = 5
     feature_dim = 3
 
-    # Initialize the AttentionMechanism 
+    # Initialize the AttentionMechanism
     attention = AttentionMechanism(feature_dim)
 
-    # Create dummy input  
+    # Create dummy input
     inputs = torch.randn(batch_size, seq_length, feature_dim)
 
     # Create dummy query (batch_size, feature_dim)
@@ -21,10 +22,10 @@ def test_attention_mechanism():
     # Call the attention mechanism
     output, attention_weights = attention(inputs, query)
 
-    # Check the output dimensions  
+    # Check the output dimensions
     assert output.size() == (batch_size, feature_dim), "Output dimensions mismatch"
-    
-    # Check that attention weights sum to 1
-    assert torch.allclose(attention_weights.sum(dim=1), torch.ones(batch_size)), "Attention weights do not sum to 1"
 
- 
+    # Check that attention weights sum to 1
+    assert torch.allclose(
+        attention_weights.sum(dim=1), torch.ones(batch_size)
+    ), "Attention weights do not sum to 1"
